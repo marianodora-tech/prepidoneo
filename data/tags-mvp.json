@@ -1,0 +1,643 @@
+{
+  "version": "mvp-1",
+  "fuente": "banco-oficial/banco.json",
+  "nota": "Stems literales del banco (campos q y a). Tags pedagógicos para PrepIdóneo. No alterar a.",
+  "examen_oficial_ref": {
+    "total": "60 Q / 45 min / 70% (42)",
+    "parcial": "30 Q / 23 min / 70% (21)",
+    "fuente": "https://www.argentina.gob.ar/servicio/rendir-el-examen-de-idoneidad"
+  },
+  "tag_schema": {
+    "modulo": [
+      "I",
+      "II",
+      "III",
+      "IV",
+      "V",
+      "VI"
+    ],
+    "familia": [
+      "numerica",
+      "contraste",
+      "ancla",
+      "rol-agente",
+      "otro"
+    ],
+    "dato_duro": "string|null",
+    "trampa": "string"
+  },
+  "mvp_flow": [
+    "diagnostico_12",
+    "practica_por_modulo",
+    "repetir_fallos",
+    "simulacro_oficial_60"
+  ],
+  "prioridades_mvp": [
+    "OPA 5/10/20 días hábiles",
+    "SOS/ROS 7 días hábiles",
+    "Títulos XI / XII / XIII Normas CNV",
+    "70/42 días corridos EEFF (y stem 60 si aparece en banco)",
+    "FCI vs FF (24.083 vs 24.441)",
+    "ALyC vs AN"
+  ],
+  "counts": {
+    "stems": 58,
+    "por_modulo": {
+      "I": 10,
+      "II": 7,
+      "III": 10,
+      "IV": 9,
+      "V": 7,
+      "VI": 15
+    },
+    "por_familia": {
+      "numerica": 13,
+      "otro": 10,
+      "ancla": 18,
+      "rol-agente": 8,
+      "contraste": 9
+    }
+  },
+  "stems": [
+    {
+      "id": "I-25",
+      "modulo": "I",
+      "n": 25,
+      "q": "¿Qué plazo tiene el oferente para publicar el prospecto de una OPA luego de su aprobación?",
+      "a": "5 días hábiles",
+      "familia": "numerica",
+      "dato_duro": "5 días hábiles",
+      "trampa": "Confundir con 10 (aceptación) o 20 (CNV)"
+    },
+    {
+      "id": "I-6",
+      "modulo": "I",
+      "n": 6,
+      "q": "¿Cuál es el plazo mínimo para aceptar una OPA una vez publicada?",
+      "a": "10 días hábiles",
+      "familia": "numerica",
+      "dato_duro": "10 días hábiles",
+      "trampa": "Confundir con 5 (publicar prospecto) o 20 (CNV)"
+    },
+    {
+      "id": "I-26",
+      "modulo": "I",
+      "n": 26,
+      "q": "¿Qué plazo mínimo debe durar la aceptación de una OPA?",
+      "a": "10 días hábiles",
+      "familia": "numerica",
+      "dato_duro": "10 días hábiles",
+      "trampa": "No mezclar con 5 publicación ni 20 CNV"
+    },
+    {
+      "id": "I-18",
+      "modulo": "I",
+      "n": 18,
+      "q": "¿Qué plazo tiene la Comisión Nacional de Valores para resolver la solicitud de autorización de una OPA?",
+      "a": "20 días hábiles",
+      "familia": "numerica",
+      "dato_duro": "20 días hábiles",
+      "trampa": "Confundir con 10 aceptación OPA"
+    },
+    {
+      "id": "I-29",
+      "modulo": "I",
+      "n": 29,
+      "q": "¿Qué plazo tiene la Comisión Nacional de Valores para objetar el precio equitativo en una OPA?",
+      "a": "20 días hábiles",
+      "familia": "numerica",
+      "dato_duro": "20 días hábiles",
+      "trampa": "Precio equitativo 20 ≠ aceptación 10"
+    },
+    {
+      "id": "I-17",
+      "modulo": "I",
+      "n": 17,
+      "q": "¿Qué principio debe respetarse en toda OPA?",
+      "a": "Igualdad de trato y transparencia",
+      "familia": "otro",
+      "dato_duro": null,
+      "trampa": "Principios OPA vs plazos OPA"
+    },
+    {
+      "id": "I-30",
+      "modulo": "I",
+      "n": 30,
+      "q": "¿Qué sucede si una emisora decide retirarse del régimen de oferta pública?",
+      "a": "Debe formular una OPA por el total de acciones",
+      "familia": "otro",
+      "dato_duro": null,
+      "trampa": "Retiro del régimen OP implica OPA total"
+    },
+    {
+      "id": "I-1",
+      "modulo": "I",
+      "n": 1,
+      "q": "¿Cuál es el objetivo principal de la Ley 26.831?",
+      "a": "Regular, supervisar y fiscalizar el mercado de capitales",
+      "familia": "ancla",
+      "dato_duro": "Ley 26.831",
+      "trampa": "Confundir objetivo con Ley 27.440"
+    },
+    {
+      "id": "I-19",
+      "modulo": "I",
+      "n": 19,
+      "q": "¿Qué sucede si el oferente incumple la obligación de formular una OPA?",
+      "a": "La Comisión Nacional de Valores dispone la subasta de las participaciones adquiridas",
+      "familia": "otro",
+      "dato_duro": null,
+      "trampa": "Incumplir OPA → subasta dispuesta por CNV"
+    },
+    {
+      "id": "I-109",
+      "modulo": "I",
+      "n": 109,
+      "q": "Dentro de los objetivos establecidos por la Ley 26.831 se incluyen:  Fortalecer los mecanismos de protección y prevención de abusos contra los inversores, en el marco de la función tuitiva del derecho del consumidor.  Propender a la inclusión financiera.",
+      "a": " Propender a la integridad y transparencia de los mercados de capitales.",
+      "familia": "ancla",
+      "dato_duro": "Ley 26.831 objetivos",
+      "trampa": "Objetivos de la ley vs facultades sueltas"
+    },
+    {
+      "id": "II-5",
+      "modulo": "II",
+      "n": 5,
+      "q": "¿Cuál es el plazo para reportar una operación sospechosa según Resolución UIF 56/2024?",
+      "a": "7 días hábiles",
+      "familia": "numerica",
+      "dato_duro": "7 días hábiles",
+      "trampa": "Confundir ROS 7 dh con plazos CNV 70/42"
+    },
+    {
+      "id": "II-6",
+      "modulo": "II",
+      "n": 6,
+      "q": "¿Qué norma establece la obligación de reportar operaciones sospechosas?",
+      "a": "Resolución UIF 29/2013",
+      "familia": "ancla",
+      "dato_duro": "Resolución UIF 29/2013",
+      "trampa": "Norma UIF ≠ Título XI solo como marco CNV"
+    },
+    {
+      "id": "II-12",
+      "modulo": "II",
+      "n": 12,
+      "q": "¿Qué organismo centraliza la recepción de Reportes de Operaciones Sospechosas?",
+      "a": "UIF",
+      "familia": "rol-agente",
+      "dato_duro": "UIF",
+      "trampa": "Receptor ROS = UIF, no CNV"
+    },
+    {
+      "id": "II-27",
+      "modulo": "II",
+      "n": 27,
+      "q": "¿Qué norma regula la prevención de Lavado de Activos y la Financiación del Terrorismo en el mercado de capitales?",
+      "a": "Normas CNV Título XI",
+      "familia": "ancla",
+      "dato_duro": "Normas CNV Título XI",
+      "trampa": "XI = PLA/FT; no confundir con XII/XIII"
+    },
+    {
+      "id": "II-7",
+      "modulo": "II",
+      "n": 7,
+      "q": "¿Cuál de los siguientes es un sujeto obligado según la Ley 25.246?",
+      "a": "Agentes de liquidación y compensación",
+      "familia": "rol-agente",
+      "dato_duro": "ALyC sujeto obligado",
+      "trampa": "ALyC es sujeto obligado Ley 25.246"
+    },
+    {
+      "id": "II-54",
+      "modulo": "II",
+      "n": 54,
+      "q": "La Autoevaluación de Riesgo para un Sujeto Obligado inscripto en la categoría",
+      "a": "de Agente de Negociación podrá realizarse (Resolución UIF 78/2023): Cada dos años.",
+      "familia": "numerica",
+      "dato_duro": "cada 2 años",
+      "trampa": "Autoevaluación AN: no asumir anual"
+    },
+    {
+      "id": "II-83",
+      "modulo": "II",
+      "n": 83,
+      "q": "Título XI Comisión Nacional de Valores. Los ALyC y colocadores de FCI deben",
+      "a": "recibir fondos de clientes exclusivamente desde: CBU/CVU de titularidad o cotitularidad del cliente en entidades autorizadas por BCRA.",
+      "familia": "rol-agente",
+      "dato_duro": "CBU/CVU titular/cotitular",
+      "trampa": "Fondos solo desde CBU/CVU del cliente"
+    },
+    {
+      "id": "III-25",
+      "modulo": "III",
+      "n": 25,
+      "q": "¿Qué norma regula las conductas contrarias a la transparencia?",
+      "a": "Normas CNV Título XII",
+      "familia": "ancla",
+      "dato_duro": "Normas CNV Título XII",
+      "trampa": "Conductas transparencia = XII, no XIII"
+    },
+    {
+      "id": "III-18",
+      "modulo": "III",
+      "n": 18,
+      "q": "¿Qué norma regula el gobierno corporativo en emisoras?",
+      "a": "Normas CNV Título XII",
+      "familia": "ancla",
+      "dato_duro": "Normas CNV Título XII",
+      "trampa": "Gobierno corporativo = XII"
+    },
+    {
+      "id": "III-20",
+      "modulo": "III",
+      "n": 20,
+      "q": "¿Qué norma establece la obligación de designar un Responsable de Relaciones con el Público Inversor?",
+      "a": "Normas CNV Título XII",
+      "familia": "ancla",
+      "dato_duro": "Normas CNV Título XII",
+      "trampa": "RRI = XII"
+    },
+    {
+      "id": "III-29",
+      "modulo": "III",
+      "n": 29,
+      "q": "¿Qué norma establece obligaciones con los clientes y empleadores?",
+      "a": "Normas CNV Título XII",
+      "familia": "ancla",
+      "dato_duro": "Normas CNV Título XII",
+      "trampa": "Obligaciones clientes/empleadores = XII"
+    },
+    {
+      "id": "III-8",
+      "modulo": "III",
+      "n": 8,
+      "q": "¿Qué norma regula el procedimiento de reclamos y consultas de inversores?",
+      "a": "Normas CNV Título XIII",
+      "familia": "ancla",
+      "dato_duro": "Normas CNV Título XIII",
+      "trampa": "Reclamos/consultas = XIII"
+    },
+    {
+      "id": "III-16",
+      "modulo": "III",
+      "n": 16,
+      "q": "¿Qué norma regula el procedimiento de reclamos y consultas?",
+      "a": "Normas CNV Título XIII",
+      "familia": "ancla",
+      "dato_duro": "Normas CNV Título XIII",
+      "trampa": "Procedimiento reclamos = XIII"
+    },
+    {
+      "id": "III-28",
+      "modulo": "III",
+      "n": 28,
+      "q": "¿Qué norma regula la recepción y tratamiento de denuncias?",
+      "a": "Normas CNV Título XIII",
+      "familia": "ancla",
+      "dato_duro": "Normas CNV Título XIII",
+      "trampa": "Denuncias = XIII"
+    },
+    {
+      "id": "III-30",
+      "modulo": "III",
+      "n": 30,
+      "q": "¿Qué norma regula la Oficina de Atención al Inversor?",
+      "a": "Normas CNV Título XIII",
+      "familia": "ancla",
+      "dato_duro": "Normas CNV Título XIII",
+      "trampa": "Oficina Atención al Inversor = XIII"
+    },
+    {
+      "id": "III-79",
+      "modulo": "III",
+      "n": 79,
+      "q": "La normativa ejemplifica también como “hechos relevantes” enmarcados en el deber de informar a:  Los cambios en el objeto social, alteraciones de importancia en sus actividades o iniciación de otras nuevas.",
+      "a": " Las pérdidas superiores al 15% del patrimonio neto.",
+      "familia": "numerica",
+      "dato_duro": "15% PN",
+      "trampa": "Hecho relevante: 15% PN ≠ 10% despidos"
+    },
+    {
+      "id": "III-92",
+      "modulo": "III",
+      "n": 92,
+      "q": "¿A partir de qué edad un Agente de Liquidación y Compensación (ALyC) puede abrir subcuentas comitentes a nombre de una persona menor de edad, según lo dispuesto por la normativa vigente?",
+      "a": "A partir de los 13 años.",
+      "familia": "numerica",
+      "dato_duro": "13 años",
+      "trampa": "Edad mínima subcuenta ALyC"
+    },
+    {
+      "id": "IV-64",
+      "modulo": "IV",
+      "n": 64,
+      "q": "Los plazos de presentación de los estados financieros para emisoras de acciones",
+      "a": "y/u obligaciones negociables son: 42 días corridos para trimestrales y 70 días corridos para anuales.",
+      "familia": "numerica",
+      "dato_duro": "42 días corridos trimestral / 70 días corridos anual",
+      "trampa": "No invertir 70/42; son días CORRIDOS"
+    },
+    {
+      "id": "IV-28",
+      "modulo": "IV",
+      "n": 28,
+      "q": "¿Qué plazo tienen las emisoras para presentar información contable periódica?",
+      "a": "60 días corridos",
+      "familia": "numerica",
+      "dato_duro": "60 días corridos",
+      "trampa": "Trampa vs 70/42 de IV#64 — memorizar ambas stems del banco"
+    },
+    {
+      "id": "IV-58",
+      "modulo": "IV",
+      "n": 58,
+      "q": "",
+      "a": "La reseña informativa es obligatoria: En Estados Contables anuales y trimestrales.",
+      "familia": "contraste",
+      "dato_duro": "Reseña anual y trimestral",
+      "trampa": "Reseña también en trimestral, no solo anual"
+    },
+    {
+      "id": "IV-72",
+      "modulo": "IV",
+      "n": 72,
+      "q": "",
+      "a": "Tanto en el régimen informativo anual como trimestral: Es obligatoria la presentación del Informe del Auditor Externo.",
+      "familia": "contraste",
+      "dato_duro": "Informe auditor anual y trimestral",
+      "trampa": "Auditor obligatorio en ambos regímenes"
+    },
+    {
+      "id": "IV-73",
+      "modulo": "IV",
+      "n": 73,
+      "q": "Una emisora que se encuentra en el régimen general de oferta pública presenta sus estados financieros a la Comisión Nacional de Valores, confeccionados conforme",
+      "a": "a: Normas Internacionales de Información Financiera (NIIF) de Contabilidad.",
+      "familia": "ancla",
+      "dato_duro": "NIIF",
+      "trampa": "Régimen general OP → NIIF"
+    },
+    {
+      "id": "IV-127",
+      "modulo": "IV",
+      "n": 127,
+      "q": "",
+      "a": "Una emisora PyME CNV puede presentar estados bajo: NCPA, quedando excluida de la obligación de NIIF.",
+      "familia": "contraste",
+      "dato_duro": "PyME = NCPA sin NIIF",
+      "trampa": "PyME excluida de NIIF pero mismos plazos en otras stems"
+    },
+    {
+      "id": "IV-19",
+      "modulo": "IV",
+      "n": 19,
+      "q": "¿Cuál es el objetivo principal de las Normas Internacionales de Información Financiera (NIIF)?",
+      "a": "Uniformar la presentación de estados financieros a nivel global",
+      "familia": "otro",
+      "dato_duro": "NIIF uniformar EEFF",
+      "trampa": "Objetivo NIIF vs plazos CNV"
+    },
+    {
+      "id": "IV-45",
+      "modulo": "IV",
+      "n": 45,
+      "q": "El “informe largo\" o \"KAM\" (del inglés, Key Audit Matters) del auditor",
+      "a": "independiente será de emisión obligatoria cuando se refiera a: Estados financieros de entidades listadas.",
+      "familia": "otro",
+      "dato_duro": "KAM entidades listadas",
+      "trampa": "KAM obligatorio en listadas"
+    },
+    {
+      "id": "IV-29",
+      "modulo": "IV",
+      "n": 29,
+      "q": "¿Qué norma regula la inscripción y control de auditores externos?",
+      "a": "Normas CNV Título II, Cap. III",
+      "familia": "ancla",
+      "dato_duro": "Normas CNV Título II Cap. III",
+      "trampa": "Registro auditores ≠ Título XII"
+    },
+    {
+      "id": "V-1",
+      "modulo": "V",
+      "n": 1,
+      "q": "¿Cuál es la función principal de un agente de negociación?",
+      "a": "Intermediar en la compra y venta de valores en mercados autorizados",
+      "familia": "rol-agente",
+      "dato_duro": "Agente de Negociación",
+      "trampa": "AN intermedia; liquida vía ALyC"
+    },
+    {
+      "id": "V-89",
+      "modulo": "V",
+      "n": 89,
+      "q": "Los ALYCs Integrales, los ALYCs Propios, los ALYCs Agro y los ANs (con convenio vigente con el respectivo ALYC Integral), son las únicas subcategorías y categoría de Agentes autorizados y registrados por la Comisión Nacional de Valores que pueden revestir la calidad de Hacedores de Mercado.",
+      "a": "Verdadero.",
+      "familia": "contraste",
+      "dato_duro": "ALyC I/P/Agro + AN con convenio",
+      "trampa": "AN necesita convenio con ALyC"
+    },
+    {
+      "id": "V-69",
+      "modulo": "V",
+      "n": 69,
+      "q": "Un Agente ALyC que posee la autorización del comitente para cumplir con la función de administración discrecional de cartera",
+      "a": "Puede invertir los saldos en beneficio del cliente",
+      "familia": "rol-agente",
+      "dato_duro": "ALyC adm. discrecional",
+      "trampa": "Con auth. puede invertir saldos en beneficio del cliente"
+    },
+    {
+      "id": "V-70",
+      "modulo": "V",
+      "n": 70,
+      "q": "El ALYC tiene facultades para: Ofrecer adelantos transitorios, con fondos propios por eventos que generen descalce o",
+      "a": "demoras transitorias.",
+      "familia": "rol-agente",
+      "dato_duro": "Adelantos con fondos propios",
+      "trampa": "Adelantos propios ≠ fondos del comitente"
+    },
+    {
+      "id": "V-87",
+      "modulo": "V",
+      "n": 87,
+      "q": "El ALYC sólo puede realizar como actividades complementarias aquellas sujetas al control de la Comisión Nacional de Valores y quedan exceptuados de dicha limitación los Bancos y Entidades Financieras autorizadas a funcionar en los términos de la Ley Nº 21.526.",
+      "a": "Verdadero.",
+      "familia": "rol-agente",
+      "dato_duro": "Actividades complementarias controladas",
+      "trampa": "Solo actividades bajo control regulatorio"
+    },
+    {
+      "id": "V-24",
+      "modulo": "V",
+      "n": 24,
+      "q": "¿Qué norma regula los mecanismos de liquidación y compensación?",
+      "a": "Normas CNV Título VI",
+      "familia": "ancla",
+      "dato_duro": "Normas CNV Título VI",
+      "trampa": "Liquidación/compensación = Título VI"
+    },
+    {
+      "id": "V-75",
+      "modulo": "V",
+      "n": 75,
+      "q": "El Agente Asesor Global de Inversión NO puede:  Ofrecer públicamente valores negociables que no cuenten con autorización de oferta pública en la República Argentina.",
+      "a": " Ser cliente del AN con quien celebre convenio.",
+      "familia": "contraste",
+      "dato_duro": "AAGI limitaciones",
+      "trampa": "AAGI ≠ ALyC; no OP pública de VN"
+    },
+    {
+      "id": "VI-1",
+      "modulo": "VI",
+      "n": 1,
+      "q": "¿Qué es un Fondo Común de Inversión (FCI)?",
+      "a": "Un patrimonio separado administrado por una sociedad gerente",
+      "familia": "contraste",
+      "dato_duro": null,
+      "trampa": "FCI como patrimonio separado administrado por SG"
+    },
+    {
+      "id": "VI-6",
+      "modulo": "VI",
+      "n": 6,
+      "q": "¿Qué norma regula los FCI en Argentina?",
+      "a": "Ley 24.083",
+      "familia": "ancla",
+      "dato_duro": "Ley 24.083",
+      "trampa": "24.083 FCI ≠ 24.441 FF"
+    },
+    {
+      "id": "VI-5",
+      "modulo": "VI",
+      "n": 5,
+      "q": "¿Qué documento describe las características del FCI?",
+      "a": "Reglamento de gestión",
+      "familia": "otro",
+      "dato_duro": "Reglamento de gestión",
+      "trampa": "RG FCI ≠ contrato de fideicomiso"
+    },
+    {
+      "id": "VI-8",
+      "modulo": "VI",
+      "n": 8,
+      "q": "¿Qué significa la suscripción en un FCI?",
+      "a": "Compra de cuotapartes por el inversor",
+      "familia": "otro",
+      "dato_duro": null,
+      "trampa": "Suscripción = compra de cuotapartes"
+    },
+    {
+      "id": "VI-9",
+      "modulo": "VI",
+      "n": 9,
+      "q": "¿Qué implica el rescate en un FCI?",
+      "a": "Venta de cuotapartes por el inversor",
+      "familia": "otro",
+      "dato_duro": null,
+      "trampa": "Rescate = venta de cuotapartes"
+    },
+    {
+      "id": "VI-25",
+      "modulo": "VI",
+      "n": 25,
+      "q": "¿Cuál es una diferencia clave entre FCI y fideicomisos financieros?",
+      "a": "El FCI no tiene fiduciario, el fideicomiso sí",
+      "familia": "contraste",
+      "dato_duro": "FCI sin fiduciario / FF con fiduciario",
+      "trampa": "Diferencia clave FCI vs FF"
+    },
+    {
+      "id": "VI-37",
+      "modulo": "VI",
+      "n": 37,
+      "q": "¿Cuál de estas premisas es correcta respecto de la conformación de la cartera de un Fondo Común de Inversión Abierto destinado al público en general?",
+      "a": "Como máximo puede invertir hasta 20% en Obligaciones Negociables emitidas por la misma emisora.",
+      "familia": "numerica",
+      "dato_duro": "máx 20% ON misma emisora",
+      "trampa": "No confundir con 75% activos en el país"
+    },
+    {
+      "id": "VI-19",
+      "modulo": "VI",
+      "n": 19,
+      "q": "¿Qué es un fideicomiso financiero?",
+      "a": "Un contrato por el cual se transmiten bienes a un fiduciario para un fin determinado.",
+      "familia": "otro",
+      "dato_duro": null,
+      "trampa": "Definición FF"
+    },
+    {
+      "id": "VI-20",
+      "modulo": "VI",
+      "n": 20,
+      "q": "¿Qué norma regula los fideicomisos financieros en Argentina?",
+      "a": "Ley 24.441",
+      "familia": "ancla",
+      "dato_duro": "Ley 24.441",
+      "trampa": "24.441 FF ≠ 24.083 FCI"
+    },
+    {
+      "id": "VI-21",
+      "modulo": "VI",
+      "n": 21,
+      "q": "¿Cuál es una característica del fideicomiso financiero?",
+      "a": "Tiene patrimonio separado del fiduciario",
+      "familia": "contraste",
+      "dato_duro": "Patrimonio separado del fiduciario",
+      "trampa": "Bienes fideicomitidos ≠ patrimonio fiduciario"
+    },
+    {
+      "id": "VI-22",
+      "modulo": "VI",
+      "n": 22,
+      "q": "¿Qué documento regula el funcionamiento del fideicomiso?",
+      "a": "Contrato de fideicomiso",
+      "familia": "otro",
+      "dato_duro": "Contrato de fideicomiso",
+      "trampa": "Contrato FF ≠ reglamento FCI"
+    },
+    {
+      "id": "VI-23",
+      "modulo": "VI",
+      "n": 23,
+      "q": "¿Qué organismo fiscaliza los fideicomisos financieros?",
+      "a": "Comisión Nacional de Valores",
+      "familia": "rol-agente",
+      "dato_duro": "CNV fiscaliza FF",
+      "trampa": "CNV ≠ UIF"
+    },
+    {
+      "id": "VI-24",
+      "modulo": "VI",
+      "n": 24,
+      "q": "¿Qué norma establece la obligación de inscripción de fideicomisos financieros?",
+      "a": "Normas CNV Título V",
+      "familia": "ancla",
+      "dato_duro": "Normas CNV Título V",
+      "trampa": "Título V PIC"
+    },
+    {
+      "id": "VI-36",
+      "modulo": "VI",
+      "n": 36,
+      "q": "¿En cuál de las siguientes categorías debe estar inscripta una sociedad para intervenir en la colocación de un Fondo Común de Inversión Cerrado?",
+      "a": "Agente de Liquidación y Compensación o Agente de Negociación.",
+      "familia": "contraste",
+      "dato_duro": "ALyC o AN",
+      "trampa": "Intervenir en colocación FCI: ALyC o AN"
+    },
+    {
+      "id": "VI-113",
+      "modulo": "VI",
+      "n": 113,
+      "q": "A fin de acreditar el cumplimiento del requisito patrimonial requerido a los Fiduciarios Financieros ¿Cuál es el plazo de presentación de los estados contables trimestrales?",
+      "a": "Dentro de los cuarenta y dos (42) días corridos de cerrado cada trimestre.",
+      "familia": "numerica",
+      "dato_duro": "42 días corridos",
+      "trampa": "EEFF fiduciarios 42 ≠ 70 anual emisoras"
+    }
+  ]
+}
