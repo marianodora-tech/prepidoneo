@@ -10,7 +10,7 @@ const KEYS = ["I", "II", "III", "IV", "V", "VI"];
 const LS_MISS = "prepidoneo_misses_v1";
 const LS_LAST = "prepidoneo_last_v1";
 
-const state = { banco: null, tags: null, session: null, tick: null };
+const state = { banco: null, tags: null, opciones: {}, session: null, tick: null };
 
 const $ = (html) => { const d = document.createElement("div"); d.innerHTML = html.trim(); return d.firstElementChild; };
 const el = () => document.getElementById("app");
@@ -43,14 +43,24 @@ function allItems() {
 }
 
 function withOptions(item) {
-  const pool = (state.banco[item.modulo] || [])
-    .map((x) => x.a)
-    .filter((a) => a && a !== item.a);
-  const unique = [...new Set(pool)];
-  const distractors = pick(unique, 3);
-  while (distractors.length < 3) distractors.push("Ninguna de las anteriores es correcta según la guía CNV.");
-  const opts = shuffle([item.a, ...distractors]);
-  return { ...item, options: opts, answerIndex: opts.indexOf(item.a), tag: tagFor(item.modulo, item.n, item.q) };
+  const pack = state.opciones[item.id] || state.opciones[item.modulo + "-" + item.n];
+  let opts = pack && pack.options && pack.options.length ? pack.options.slice() : null;
+  if (!opts) {
+    const k = (item.q + " " + item.a).toLowerCase();
+    let pool;
+    if (/d[ií]as|horas|plazo/.test(k)) pool = ["5 días hábiles", "7 días hábiles", "10 días hábiles", "20 días hábiles"];
+    else if (/ley\s|decreto/.test(k)) pool = ["Ley 26.831", "Ley 24.083", "Ley 24.441", "Ley 25.246"];
+    else if (/t[ií]tulo/.test(k)) pool = ["Normas CNV Título V", "Normas CNV Título XI", "Normas CNV Título XII", "Normas CNV Título XIII"];
+    else pool = [
+      "La CNV no tiene esa atribución según la Ley 26.831",
+      "Esa obligación corresponde al BCRA, no al régimen CNV",
+      "Ese supuesto no está contemplado en las Normas CNV",
+    ];
+    opts = [item.a, ...pool.filter((x) => x !== item.a)].slice(0, 4);
+  }
+  opts = shuffle(opts);
+  const answerIndex = opts.findIndex((x) => x === item.a);
+  return { ...item, options: opts, answerIndex: answerIndex < 0 ? 0 : answerIndex, tag: tagFor(item.modulo, item.n, item.q) };
 }
 
 function explain(item, ok) {
@@ -289,12 +299,14 @@ function act(kind, m) {
 
 async function init() {
   try {
-    const [b, t] = await Promise.all([
+    const [b, t, o] = await Promise.all([
       fetch("./data/banco.json").then((r) => r.json()),
       fetch("./data/tags-mvp.json").then((r) => r.ok ? r.json() : { stems: [] }),
+      fetch("./data/opciones.json").then((r) => r.ok ? r.json() : {}),
     ]);
     state.banco = b;
     state.tags = t;
+    state.opciones = o;
     render();
   } catch (e) {
     el().innerHTML = "<p>No pude cargar el banco. Recargá la página.</p>";
