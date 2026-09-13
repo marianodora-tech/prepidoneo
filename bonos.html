@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>VAN, TIR y Renta Fija — PrepIdóneo</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css"/>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]});"></script>
+<style>
+:root{--bg:#070c14;--card:#121b29;--line:#2a3a52;--txt:#e8eef6;--mut:#8fa3bb;--acc:#5b9cff;--ok:#34d399;--warn:#fbbf24;--hot:#fb7185}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--txt);font-family:Inter,system-ui,Segoe UI,Roboto,sans-serif}
+.deck{height:100%;overflow:hidden}
+.slide{display:none;height:100%;padding:32px 44px 76px;max-width:1120px;margin:0 auto;flex-direction:column;justify-content:center}
+.slide.on{display:flex}
+.kicker{color:var(--acc);letter-spacing:.12em;text-transform:uppercase;font-size:.7rem;font-weight:800;margin:0 0 8px}
+h1{font-size:2.2rem;line-height:1.15;margin:0 0 12px}
+h2{font-size:1.72rem;margin:0 0 12px}
+p,li{font-size:1.04rem;line-height:1.48;color:#d5deea}
+.mut{color:var(--mut)}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:center}
+.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px}
+.card h3{margin:0 0 6px;font-size:1.02rem}
+img.g{width:100%;border-radius:14px;border:1px solid var(--line);background:#0b1220}
+.formula{background:#0b1220;border:1px solid #334155;border-radius:14px;padding:12px 16px;margin:10px 0;overflow-x:auto}
+.tag{display:inline-block;background:rgba(91,156,255,.14);color:#93c5fd;border:1px solid rgba(91,156,255,.3);padding:2px 8px;border-radius:999px;font-size:.7rem;font-weight:700;margin:0 4px 4px 0}
+.tag.ok{background:rgba(52,211,153,.12);color:#6ee7b7;border-color:rgba(52,211,153,.3)}
+.tag.warn{background:rgba(251,191,36,.12);color:#fcd34d;border-color:rgba(251,191,36,.35)}
+.foot{position:fixed;bottom:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:10px 22px;background:rgba(7,12,20,.92);border-top:1px solid var(--line);font-size:.85rem;color:var(--mut);z-index:5}
+button{border:1px solid var(--line);background:var(--card);color:var(--txt);padding:8px 12px;border-radius:10px;cursor:pointer;font-weight:700}
+button:hover{filter:brightness(1.12)}
+.big{font-size:1.2rem}
+.ok{color:var(--ok);font-weight:750}
+.hot{color:var(--hot);font-weight:750}
+.warn{color:var(--warn)}
+ul{margin:6px 0 0 18px;padding:0}
+li{margin:5px 0}
+.lvl{font-size:.72rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--warn);margin:0 0 4px}
+table{width:100%;border-collapse:collapse;font-size:.92rem}
+th,td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:right}
+th:first-child,td:first-child{text-align:left}
+th{color:var(--mut);font-weight:700}
+.toc a{color:#93c5fd;text-decoration:none;display:block;padding:4px 0}
+@media (max-width:800px){
+  .slide{padding:20px 14px 80px}
+  h1{font-size:1.5rem} h2{font-size:1.28rem}
+  .row,.row3{grid-template-columns:1fr}
+  p,li{font-size:.98rem}
+}
+</style>
+</head>
+<body>
+<div class="deck" id="deck">
+
+<section class="slide on">
+  <p class="kicker">PrepIdóneo · Idóneo CNV</p>
+  <h1>VAN, TIR y Renta Fija</h1>
+  <p class="big mut">De cero a experto. Todo lo que entra: clase de Renta Fija del curso BCR (Collatti) + Módulo IV de la guía CNV (jun 2026).</p>
+  <div class="row" style="margin-top:18px">
+    <div class="card">
+      <h3>Fuentes (nada inventado)</h3>
+      <p><span class="tag">Clase Collatti</span> indicadores, TIR, duration, CER, dólar linked, riesgos.<br>
+      <span class="tag ok">Guía CNV · oficial</span> VAN, TIR y todos los ejercicios con número.</p>
+    </div>
+    <div class="card">
+      <h3>Cómo usarla</h3>
+      <p>Flechas o botones. Calculadora al lado. Un concepto por pantalla. Al final, 4 cuentas para hacer vos en 60 min.</p>
+    </div>
+  </div>
+  <p class="mut" style="margin-top:14px">El PDF del curso rotulado “11 a 14” es Futuros y Opciones (otro deck). Esto es la clase de RF + el módulo de valuación de la guía.</p>
+</section>
+
+<section class="slide">
+  <p class="kicker">Mapa</p>
+  <h2>Seis bloques, un solo hilo</h2>
+  <div class="row3">
+    <div class="card"><h3>1. VAN</h3><p>¿Me sobra plata, en pesos de hoy, después de exigirle mi tasa?</p></div>
+    <div class="card"><h3>2. TIR</h3><p>¿Qué tasa está implícita en este precio? VAN = 0.</p></div>
+    <div class="card"><h3>3. Indicadores</h3><p>SIB, VR, clean, corridos, valor técnico, paridad.</p></div>
+  </div>
+  <div class="row3" style="margin-top:12px">
+    <div class="card"><h3>4. Precio del bono</h3><p>Flujos descontados. AL30 de la clase. Cero y CY de la guía.</p></div>
+    <div class="card"><h3>5. Duration / convex</h3><p>Cuánto duele +1% de tasa. Números IV-120 y IV-125.</p></div>
+    <div class="card"><h3>6. Argentina + riesgos</h3><p>CER, dólar linked, crédito, precio, reinversión.</p></div>
+  </div>
+</section>
+
+<section class="slide">
+  <p class="lvl">VAN · nivel 0</p>
+  <h2>La idea en criollo</h2>
+  <p class="big">El <strong>Valor Actual Neto</strong> responde: <em>si meto esta plata hoy, ¿me queda algo después de exigirle a la inversión la tasa que yo quiero?</em></p>
+  <div class="row" style="margin-top:14px">
+    <div class="card"><h3 class="ok">VAN &gt; 0</h3><p>Paga <strong>más</strong> que tu tasa exigida. Conviene a esa tasa.</p></div>
+    <div class="card"><h3 class="hot">VAN &lt; 0</h3><p>No llega. Caro. No conviene a esa tasa.</p></div>
+  </div>
+  <p style="margin-top:14px">Un peso en 4 años <strong>no es</strong> un peso hoy. El VAN trae todos los pesos futuros a hoy y les resta lo que invertiste.</p>
+  <p><span class="tag ok">Guía CNV · oficial</span> IV-1: el VAN es <strong>la diferencia entre el valor presente de los flujos y la inversión inicial</strong>.</p>
+</section>
+
+<section class="slide">
+  <p class="lvl">VAN · nivel 1</p>
+  <h2>La fórmula</h2>
+  <div class="formula">$$VAN=-I_0+\sum_{t=1}^{n}\frac{CF_t}{(1+r)^t}$$</div>
+  <ul>
+    <li>\(I_0\) — lo que pagás hoy (precio del bono / desembolso del proyecto)</li>
+    <li>\(CF_t\) — cada flujo futuro (cupón, amortización, VN al final)</li>
+    <li>\(r\) — tasa de descuento (la que exigís, o la TIR del mercado)</li>
+  </ul>
+  <div class="card" style="margin-top:12px">
+    <h3>Atajo para un bono</h3>
+    <p>El <strong>precio justo</strong> es el VAN de los flujos <em>sin</em> restar \(I_0\). Si pagás exactamente ese precio, VAN = 0.</p>
+    <div class="formula">$$P=\sum_{t=1}^{n}\frac{C}{(1+r)^t}+\frac{VN}{(1+r)^n}$$</div>
+  </div>
+</section>
+
+<section class="slide">
+  <p class="lvl">VAN · nivel 1</p>
+  <h2>Qué mueve el número</h2>
+  <p><span class="tag ok">Guía CNV · oficial</span> IV-6: el factor que afecta <strong>directamente</strong> el VAN es <strong>la tasa de descuento aplicada a los flujos futuros</strong>.</p>
+  <ul>
+    <li>Sube \(r\) → cada flujo vale menos hoy → VAN baja (y el precio del bono también).</li>
+    <li>Flujos más cercanos valen más (por eso un amortizable vale más que un bullet, misma tasa).</li>
+    <li>VAN positivo no es “ganancia segura”: es “gana <em>más que \(r\)</em>”.</li>
+    <li>Dos proyectos de distinto tamaño: se elige el de <strong>mayor VAN</strong>, no la TIR más alta.</li>
+  </ul>
+</section>
+
+<section class="slide">
+  <p class="lvl">VAN · gráfico</p>
+  <h2>La curva: más tasa, menos VAN</h2>
+  <img class="g" src="./bonos/g-van-tir.png" alt="VAN versus tasa de descuento, cruce en la TIR"/>
+  <p>Ejemplo didáctico con los flujos de IV-118 (no es un gráfico de la guía). Donde cruza cero, esa tasa <strong>es</strong> la TIR.</p>
+</section>
+
+<section class="slide">
+  <p class="lvl">TIR · nivel 0</p>
+  <h2>La idea en criollo</h2>
+  <p class="big">La <strong>Tasa Interna de Retorno</strong> es la rentabilidad que trae metida el negocio si pagás este precio y cobrás todos los flujos.</p>
+  <p>Pregunta: <em>¿a qué tasa el VAN da justo cero?</em></p>
+  <div class="card" style="margin-top:14px">
+    <p><span class="tag ok">Guía CNV · oficial</span> IV-2: la TIR es <strong>la tasa que iguala el VAN a cero</strong>.</p>
+  </div>
+  <div class="formula">$$0=-P+\sum_{t=1}^{n}\frac{CF_t}{(1+TIR)^t} \quad\Leftrightarrow\quad VAN(TIR)=0$$</div>
+</section>
+
+<section class="slide">
+  <p class="lvl">TIR · nivel 1 · clase</p>
+  <h2>Tres supuestos (entran tal cual)</h2>
+  <p><span class="tag">Clase Collatti</span> La TIR del bono iguala el valor presente de <strong>todos</strong> los flujos (capital + intereses) con su precio. Asume:</p>
+  <div class="row3" style="margin-top:12px">
+    <div class="card"><h3>1. Reinversión</h3><p>Los cupones se reinvierten a la <strong>misma</strong> TIR.</p></div>
+    <div class="card"><h3>2. Cobro efectivo</h3><p>Los flujos futuros se cobran (no hay default).</p></div>
+    <div class="card"><h3>3. Hold to maturity</h3><p>Te quedás hasta el vencimiento. Es un yield to maturity.</p></div>
+  </div>
+  <p style="margin-top:14px">Si alguno falla, la rentabilidad <em>realizada</em> no es la TIR. Por eso el riesgo de reinversión es el clásico de la guía (IV-4).</p>
+</section>
+
+<section class="slide">
+  <p class="lvl">TIR · nivel experto</p>
+  <h2>Trampas de idóneo</h2>
+  <ul>
+    <li><strong>TIR ≠ cupón.</strong> El cupón está fijo en el contrato. La TIR cambia con el precio.</li>
+    <li>Sube el precio → baja la TIR. Es la misma curva de siempre.</li>
+    <li>Varias TIR si hay flujos negativos en el medio (raro en un bono bullet).</li>
+    <li>No compares TIR de dos proyectos de distinto tamaño o plazo a ciegas: usá VAN.</li>
+    <li>Bono a la par: <strong>TIR = cupón = current yield</strong>.</li>
+  </ul>
+  <div class="card" style="margin-top:12px"><h3>Decisión simple</h3><p>TIR &gt; tasa exigida → VAN &gt; 0 → sí. TIR &lt; exigida → VAN &lt; 0 → no. Si los tamaños difieren, gana el VAN.</p></div>
+</section>
+
+<section class="slide">
+  <p class="kicker">Clase Collatti</p>
+  <h2>Qué es un título de renta fija</h2>
+  <p>Instrumento de deuda: el emisor se compromete a devolver capital (+ intereses según condiciones de emisión). El flujo está definido de antemano (salvo default o ajustes).</p>
+  <div class="row" style="margin-top:12px">
+    <div class="card">
+      <h3>Privados</h3>
+      <ul>
+        <li>Obligaciones negociables (ON) — Ley 23.576</li>
+        <li>Valores de deuda fiduciaria (VDF de FF)</li>
+        <li>Valores de corto plazo</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Públicos</h3>
+      <ul>
+        <li>Bonos nacionales / provinciales</li>
+        <li>Letras (Lebacs / Letes)</li>
+        <li>Notas</li>
+      </ul>
+    </div>
+  </div>
+  <p style="margin-top:12px"><span class="tag ok">Guía CNV · oficial</span> IV-3: característica principal de RF = <strong>pago de intereses preestablecidos y vencimiento definido</strong>. IV-5: ON → <strong>Ley 23.576</strong>.</p>
+</section>
+
+<section class="slide">
+  <p class="kicker">Clase Collatti · indicadores 1</p>
+  <h2>Identidad, plazo y capital</h2>
+  <div class="card">
+    <ul>
+      <li><strong>Código SIB</strong> — alfanumérico del Sistema de Información Bursátil. Identifica la especie.</li>
+      <li><strong>Vencimiento</strong> — fecha del último pago de capital y/o interés, según condiciones de emisión.</li>
+      <li><strong>Amortización</strong> — cómo se devuelve el capital.</li>
+    </ul>
+  </div>
+  <div class="row" style="margin-top:12px">
+    <div class="card"><h3>Bullet</h3><p>Todo el capital al vencimiento. Ej. clase: AA19, AA21, AA26, AA46, AO20; en $ AO17, AMX8, AMX9, AM20, TM18, TS18.</p></div>
+    <div class="card"><h3>Amortizable</h3><p>Cuotas periódicas: mensual, trimestral, semestral o anual. El <strong>valor residual</strong> baja en cada cuota.</p></div>
+  </div>
+</section>
+
+<section class="slide">
+  <p class="kicker">Guía CNV · IV-104</p>
+  <h2>Amortizable vale más que bullet</h2>
+  <p>Bono A: amortiza + interés semestral. Bono B: interés semestral, <strong>bullet</strong>. Mismo cupón, mismo calendario, vencen en 1 año. Misma tasa de descuento.</p>
+  <div class="card" style="margin-top:12px">
+    <p><span class="tag ok">Oficial</span> <strong>El valor actual de los flujos de A es mayor al de B.</strong></p>
+    <p class="mut">Por qué: A te devuelve capital antes. Un peso más cerca vale más. No es “más cupón”: es timing del principal.</p>
+  </div>
+</section>
+
+<section class="slide">
+  <p class="kicker">Clase Collatti · indicadores 2</p>
+  <h2>Cómo paga el interés</h2>
+  <div class="row">
+    <div class="card">
+      <h3>Cupón cero</h3>
+      <p>No paga interés periódico. Se compra con descuento; al vto cobrás el VN. En Argentina: Letras / LEBACS.</p>
+    </div>
+    <div class="card">
+      <h3>Cupón periódico</h3>
+      <p>Mensual, trimestral o semestral. Fijo o variable (Libor, Badlar, caja de ahorro, encuesta plazo fijo). A veces capitalizan el interés hasta cierta fecha.</p>
+    </div>
+  </div>
+  <p style="margin-top:12px"><strong>Renta anual %</strong> — tasa/cupón según condiciones de emisión. Es el contrato, no el rendimiento de mercado.</p>
+</section>
+
+<section class="slide">
+  <p class="kicker">Clase Collatti · indicadores 3</p>
+  <h2>Valor residual e intereses corridos</h2>
+  <div class="row">
+    <div class="card">
+      <h3>Valor residual (VR %)</h3>
+      <p>Porción del título que <strong>aún no</strong> se amortizó. Baja en cada cuota, en la proporción de las condiciones de emisión.</p>
+    </div>
+    <div class="card">
+      <h3>Intereses corridos</h3>
+      <p>Interés <strong>devengado</strong> desde el último cupón hasta hoy (cada 100 VN). Convenciones: <strong>30/360</strong>, <strong>actual/360</strong>, <strong>actual/365</strong>.</p>
+    </div>
+  </div>
+  <div class="formula">$$\text{Intereses corridos}\approx VN\times VR\times \text{tasa}\times\frac{\text{días}}{\text{base}}$$</div>
+  <p class="mut">Fórmula didáctica. En el examen importa el concepto y las tres bases, no un número inventado.</p>
+</section>
+
+<section class="slide">
+  <p class="kicker">Clase Collatti · indicadores 4</p>
+  <h2>Clean, yield, valor técnico, paridad</h2>
+  <div class="row">
+    <div class="card">
+      <h3>Precio clean</h3>
+      <p>Precio de mercado <strong>sin</strong> intereses corridos. Dirty ≈ clean + corridos.</p>
+    </div>
+    <div class="card">
+      <h3>Yield anual</h3>
+      <p>Relaciona la <strong>renta anual</strong> con el <strong>precio clean</strong>. Es el current yield de la clase.</p>
+    </div>
+  </div>
+  <div class="row" style="margin-top:12px">
+    <div class="card">
+      <h3>Valor técnico (cada 100 VN)</h3>
+      <p>\(VT = VR + \text{intereses corridos}\). Equivale al precio teórico de rescate anticipado.</p>
+    </div>
+    <div class="card">
+      <h3>Paridad %</h3>
+      <p>\(\text{Paridad}=\text{Cotización}/VT\times 100\). =100 a la par; &lt;100 bajo; &gt;100 sobre.</p>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <p class="kicker">Par, premio, descuento</p>
+  <h2>Tres posiciones, una sola regla</h2>
+  <div class="row3">
+    <div class="card"><h3 class="hot">Bajo la par</h3><p>P &lt; VN (o paridad &lt; 100). El mercado exige más que el cupón. TIR &gt; cupón.</p></div>
+    <div class="card"><h3 class="ok">A la par</h3><p>P = VN. TIR = cupón = CY.</p></div>
+    <div class="card"><h3 class="warn">Sobre la par</h3><p>P &gt; VN. Cupón rico para las tasas de hoy. TIR &lt; cupón.</p></div>
+  </div>
+  <p style="margin-top:14px"><span class="tag ok">Guía CNV · oficial</span> IV-119: un bono cotiza sobre la par cuando <strong>el precio es mayor que su valor nominal</strong>.</p>
+  <p class="mut">Cuidado: la paridad de Collatti es contra el <em>valor técnico</em>, no contra el VN. En la guía, “sobre la par” lo anclan al VN. Son primos, no gemelos.</p>
+</section>
+
+<section class="slide">
+  <p class="kicker">Tres tasas, no las mezcles</p>
+  <h2>Cupón · Current yield · TIR</h2>
+  <div class="formula">$$\text{Tasa cupón}=\frac{C}{VN}\qquad CY=\frac{C}{P}\qquad TIR\text{ resuelve }VAN=0$$</div>
+  <img class="g" src="./bonos/g-cy-tir.png" alt="Comparación cupón, current yield y TIR"/>
+  <p>Bajo la par el orden es <strong>TIR &gt; CY &gt; cupón</strong>. A la par las tres coinciden. Sobre la par se invierte.</p>
+</section>
+
+<section class="slide">
+  <p class="lvl">Nivel 2 · guía</p>
+  <h2>IV-118: precio y current yield</h2>
+  <p>VN $1.000 · cupón $100 anual · 4 años · TIR 12%.</p>
+  <div class="formula">$$P=\frac{100}{1{,}12}+\frac{100}{1{,}12^2}+\frac{100}{1{,}12^3}+\frac{1100}{1{,}12^4}=939{,}13$$</div>
+  <div class="formula">$$CY=\frac{100}{939{,}13}=\mathbf{10,65\%}$$</div>
+  <p><span class="tag ok">Oficial</span> Current yield = <strong>10,65%</strong>. Cupón 10%, TIR 12%. Bajo la par, como tiene que ser.</p>
+  <p class="mut">La guía no pide el 939: pide el CY. Sin el precio no hay CY. En la HP: NPV o descuento flujo por flujo.</p>
+</section>
+
+<section class="slide">
+  <p class="kicker">Precio y TIR</p>
+  <h2>Se miran de frente</h2>
+  <img class="g" src="./bonos/g-precio-tir.png" alt="Curva precio versus TIR"/>
+  <p>Más TIR, menos precio. Cruza $1.000 cuando TIR = cupón. El puntito de la guía es IV-118 (P ≈ 939, TIR 12%).</p>
+</section>
+
+<section class="slide">
+  <p class="kicker">Cupón cero</p>
+  <h2>Un solo flujo: la TIR sí se despeja</h2>
+  <div class="formula">$$P=\frac{VN}{(1+TIR)^n}\qquad TIR=\left(\frac{VN}{P}\right)^{1/n}-1$$</div>
+  <p><span class="tag ok">Guía CNV · oficial</span> IV-116: VN 1.000, 10 años, r = 9,6%.</p>
+  <div class="formula">$$P=\frac{1000}{1{,}096^{10}}=\mathbf{399,85}$$</div>
+  <img class="g" src="./bonos/g-cero.png" alt="Precio de un cupón cero acercándose al valor nominal"/>
+</section>
+
+<section class="slide">
+  <p class="kicker">Trampa IV-103</p>
+  <h2>Qué NO es propia de un cupón cero</h2>
+  <p><span class="tag ok">Oficial</span> La guía marca como respuesta: <em>“Un bono cupón cero puede negociarse sobre la par cuando bajan las tasas de interés.”</em></p>
+  <div class="card" style="margin-top:12px">
+    <p>Con <strong>tasas positivas</strong> un cero se compra con descuento: P &lt; VN. Si las tasas bajan, el precio <strong>sube y se acerca</strong> a 1000, pero no pasa la par salvo tasa negativa. Esa frase es la que la guía considera que <strong>no</strong> es característica propia.</p>
+  </div>
+</section>
+
+<section class="slide">
+  <p class="kicker">Clase Collatti · AL30</p>
+  <h2>Un bono argentino de verdad</h2>
+  <p>Amortización: 13 cuotas semestrales. Primera 4% del capital, las otras 12 de 8%. Pagos 09/01 y 09/07. Vto 09/07/2030.</p>
+  <p>Cupón escalonado: 0,125% → 0,50% → 0,75% → <strong>1,75%</strong> hasta el vto. Empieza 09/07/2021.</p>
+  <img class="g" src="./bonos/g-al30.png" alt="Flujos AL30 de la clase Collatti"/>
+</section>
+
+<section class="slide">
+  <p class="kicker">Clase Collatti · AL30</p>
+  <h2>La tabla de flujos (tal cual la clase)</h2>
+  <table>
+    <tr><th>Fecha</th><th>VR</th><th>Renta</th><th>Amort</th><th>FF</th></tr>
+    <tr><td>2026-07-09</td><td>72</td><td>0,27</td><td>8</td><td>8,27</td></tr>
+    <tr><td>2027-01-09</td><td>64</td><td>0,24</td><td>8</td><td>8,24</td></tr>
+    <tr><td>2027-07-09</td><td>56</td><td>0,21</td><td>8</td><td>8,21</td></tr>
+    <tr><td>2028-01-09</td><td>48</td><td>0,42</td><td>8</td><td>8,42</td></tr>
+    <tr><td>2028-07-09</td><td>40</td><td>0,35</td><td>8</td><td>8,35</td></tr>
+    <tr><td>2029-01-09</td><td>32</td><td>0,28</td><td>8</td><td>8,28</td></tr>
+    <tr><td>2029-07-09</td><td>24</td><td>0,21</td><td>8</td><td>8,21</td></tr>
+    <tr><td>2030-01-09</td><td>16</td><td>0,14</td><td>8</td><td>8,14</td></tr>
+    <tr><td>2030-07-09</td><td>8</td><td>0,07</td><td>8</td><td>8,07</td></tr>
+  </table>
+  <p class="mut">La TIR es la \(r\) que hace \(\sum FF_t/(1+r)^t =\) precio. Acá no hay que calcularla: hay que saber <em>qué</em> se mete en la máquina.</p>
+</section>
+
+<section class="slide">
+  <p class="kicker">Clase Collatti</p>
+  <h2>Duration: vida promedio del bono</h2>
+  <p>Macaulay: plazo promedio ponderado por el valor presente de cada flujo.</p>
+  <div class="formula">$$D=\frac{1}{P}\sum_t t\cdot\frac{FF_t}{(1+i)^t}$$</div>
+  <p><strong>Duration modificada</strong> (clase): \(DM=D/(1+i)\), con \(i\) = TIR del período.</p>
+  <div class="formula">$$\frac{\Delta P}{P}\approx -DM\cdot\Delta TIR$$</div>
+  <p>Más plazo promedio → más DM → el precio se mueve más. Si esperás <strong>baja</strong> de tasas, querés <strong>más</strong> duration.</p>
+</section>
+
+<section class="slide">
+  <p class="kicker">Guía CNV · IV-120</p>
+  <h2>Duration de una cartera</h2>
+  <p>No es el promedio simple. Se pondera por <strong>precio</strong> (valor de mercado).</p>
+  <div class="formula">$$D=\frac{1050\cdot 8+1000\cdot 6+950\cdot 4}{3000}=\mathbf{6,07}$$</div>
+  <img class="g" src="./bonos/g-duration-cartera.png" alt="Aporte de cada bono a la duration de cartera"/>
+  <p><span class="tag ok">Oficial</span> 6,07. En la calculadora: (8400+6000+3800)/3000 = 18200/3000 = 6,066… → 6,07.</p>
+</section>
+
+<section class="slide">
+  <p class="kicker">Guía CNV · IV-125</p>
+  <h2>Convexidad: la curva no es una recta</h2>
+  <img class="g" src="./bonos/g-convexidad.png" alt="Aproximación lineal versus con convexidad"/>
+  <p>DM = 5,21 · Conv = 52,1 · \(\Delta y = +1,21\% = 0,0121\).</p>
+  <div class="formula">$$\frac{\Delta P}{P}\approx -5{,}21\cdot 0{,}0121 + 52{,}1\cdot 0{,}0121^2=\mathbf{-5,54\%}$$</div>
+  <p><span class="tag ok">Oficial</span> −5,54%. <span class="tag warn">Ojo</span> los manuales CFA ponen \(\tfrac12 Conv(\Delta y)^2\) y te da −5,92%. En <strong>este</strong> examen usá la fórmula de arriba, sin el ½.</p>
+</section>
+
+<section class="slide">
+  <p class="kicker">Clase Collatti · Argentina</p>
+  <h2>CER</h2>
+  <div class="row">
+    <div>
+      <ul>
+        <li>Lo publica <strong>diario</strong> el BCRA.</li>
+        <li>Replica la variación del <strong>IPC (INDEC)</strong>.</li>
+        <li>Rezago ≈ <strong>45 días</strong> respecto de la inflación.</li>
+        <li>Índice acumulativo, base 1 en el origen.</li>
+      </ul>
+      <p>Bonos/letras CER ajustan el capital (y a veces el cupón) por este índice. El cupón “chico” es real; el nominal se come la inflación via CER.</p>
+    </div>
+    <div class="card">
+      <h3>Tip de examen</h3>
+      <p>Si preguntan “qué es el CER”, la respuesta corta es: índice del BCRA que sigue al IPC, con rezago de ~45 días.</p>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <p class="kicker">Clase Collatti · Argentina</p>
+  <h2>Bonos dólar linked</h2>
+  <ul>
+    <li>Emitidos en <strong>pesos</strong>.</li>
+    <li>Capital e intereses se <strong>ajustan</strong> por el dólar oficial (Com. “A” 3500 / TC de referencia del Tesoro).</li>
+    <li>Se pagan <strong>siempre en pesos</strong>.</li>
+    <li><strong>No</strong> se pagan en billetes, ni MEP, ni CCL.</li>
+  </ul>
+  <div class="card" style="margin-top:12px">
+    <h3>Para qué existen</h3>
+    <p>Proteger contra la devaluación del tipo de cambio <em>oficial</em>. Si el oficial se atrasa vs MEP, el linked no te cubre ese gap.</p>
+  </div>
+</section>
+
+<section class="slide">
+  <p class="kicker">Clase Collatti · lista de examen</p>
+  <h2>Riesgos de un bono</h2>
+  <div class="row">
+    <div class="card">
+      <h3>1. Crédito</h3>
+      <p>El emisor no paga (default). Rating, covenants, subordinación.</p>
+    </div>
+    <div class="card">
+      <h3>2. Tasa de interés</h3>
+      <p><strong>De precio:</strong> sube la tasa de mercado, baja el precio.<br>
+      <strong>De reinversión:</strong> la TIR asume reinvertir cupones a la misma tasa; si las tasas caen, reinvertís peor.</p>
+    </div>
+  </div>
+  <p style="margin-top:14px"><span class="tag ok">Guía CNV · oficial</span> IV-4: un riesgo asociado a la renta fija es el <strong>riesgo de reinversión</strong>.</p>
+</section>
+
+<section class="slide">
+  <p class="kicker">Mismo módulo · ratios que también entran</p>
+  <h2>ROE y liquidez (IV-105 / IV-106)</h2>
+  <div class="formula">$$ROE=\frac{\text{Beneficio neto}}{PN}\qquad \text{Liquidez}=\frac{AC}{PC}\qquad \text{Endeudamiento}=\frac{PC+PNC}{PN}$$</div>
+  <div class="card">
+    <p><span class="tag ok">IV-105</span> El ROE <strong>sube</strong> si la ganancia neta cae 5% y el valor libro promedio cae 10%: \(0,95/0,90&gt;1\).</p>
+    <p><span class="tag ok">IV-106</span> AC 11.492 · PC 16.914 · PNC 3.941 · PN 17.610.</p>
+    <p>Liquidez \(=11492/16914=\mathbf{68\%}\). Endeudamiento \(=20855/17610=\mathbf{1,18}\).</p>
+  </div>
+  <p class="mut">Del mismo curso: PER = Precio/BPA. PER alto = el mercado espera alto crecimiento (IV-9, IV-12).</p>
+</section>
+
+<section class="slide">
+  <p class="kicker">Banco oficial · para practicar</p>
+  <h2>Las 8 que tenés que saber hacer</h2>
+  <div class="card">
+    <ul>
+      <li>IV-1 VAN = VP flujos − inversión inicial</li>
+      <li>IV-2 TIR = tasa que hace VAN = 0</li>
+      <li>IV-6 El VAN se mueve con la tasa de descuento</li>
+      <li>IV-104 Amortizable &gt; bullet (mismo descuento)</li>
+      <li>IV-116 Cero: \(1000/1{,}096^{10}=\mathbf{399,85}\)</li>
+      <li>IV-118 CY = \(100/939{,}13=\mathbf{10,65\%}\)</li>
+      <li>IV-120 Duration cartera = <strong>6,07</strong></li>
+      <li>IV-125 \(\Delta P/P=\mathbf{-5,54\%}\) &nbsp;(sin el ½ CFA)</li>
+    </ul>
+  </div>
+</section>
+
+<section class="slide">
+  <p class="kicker">Cheat sheet</p>
+  <h2>En el músculo, 30 segundos</h2>
+  <div class="card">
+    <ul>
+      <li>VAN = flujos descontados − lo que pagás hoy</li>
+      <li>TIR = tasa que hace VAN = 0 · precio ↑ entonces TIR ↓</li>
+      <li>TIR asume: reinversión, cobro, hold to maturity</li>
+      <li>Clean = sin corridos · VT = VR + corridos · Paridad = Cotiz / VT</li>
+      <li>A la par: cupón = CY = TIR · Bajo la par: TIR &gt; CY &gt; cupón</li>
+      <li>Cero: \(P=VN/(1+r)^n\)</li>
+      <li>Duration cartera = promedio ponderado por precio</li>
+      <li>ΔP/P ≈ −DM Δy + Conv (Δy)² &nbsp;← números de <em>esta</em> guía</li>
+      <li>CER = IPC BCRA, ~45 días · Linked = pesos + oficial, no MEP</li>
+    </ul>
+  </div>
+</section>
+
+<section class="slide">
+  <p class="kicker">Cierre · acción de hoy</p>
+  <h2>60 minutos, calculadora, cuatro cuentas</h2>
+  <p>Sin mirar las respuestas. Después contrastá con esta clase.</p>
+  <div class="card">
+    <ol>
+      <li>IV-116: cero VN 1000, 10 años, 9,6% → precio a dos decimales.</li>
+      <li>IV-118: cupón 100, VN 1000, 4 años, TIR 12% → current yield.</li>
+      <li>IV-120: precios 1050 / 1000 / 950 · D 8 / 6 / 4 → duration cartera.</li>
+      <li>IV-125: DM 5,21 · Conv 52,1 · +1,21% → variación de precio (sin ½).</li>
+    </ol>
+  </div>
+  <p style="margin-top:16px">PrepIdóneo · práctica no oficial · guía CNV jun 2026 + clase Collatti<br><span class="mut">← → para moverte · <a href="./" style="color:#93c5fd">volver al simulacro</a></span></p>
+</section>
+
+</div>
+<div class="foot">
+  <span id="pos">1 / 1</span>
+  <div>
+    <button type="button" id="prev">←</button>
+    <button type="button" id="next">→</button>
+  </div>
+  <a href="./" style="color:#93c5fd">Simulacro</a>
+</div>
+<script>
+const slides=[...document.querySelectorAll('.slide')];
+let i=0;
+function show(n){
+  i=(n+slides.length)%slides.length;
+  slides.forEach((s,k)=>s.classList.toggle('on',k===i));
+  document.getElementById('pos').textContent=(i+1)+' / '+slides.length;
+}
+document.getElementById('prev').onclick=()=>show(i-1);
+document.getElementById('next').onclick=()=>show(i+1);
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key===' ') {e.preventDefault(); show(i+1);}
+  if(e.key==='ArrowLeft') show(i-1);
+});
+let tx=null;
+document.addEventListener('touchstart',e=>{tx=e.changedTouches[0].screenX;},{passive:true});
+document.addEventListener('touchend',e=>{
+  if(tx==null) return;
+  const dx=e.changedTouches[0].screenX-tx;
+  if(dx<-40) show(i+1);
+  if(dx>40) show(i-1);
+  tx=null;
+},{passive:true});
+show(0);
+</script>
+</body>
+</html>
